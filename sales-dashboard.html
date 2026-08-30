@@ -1,0 +1,748 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Analytics Dashboard | Qurat ul Mursaleen</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .case-hero {
+            max-width: 1250px;
+            margin: auto;
+            padding: 120px 30px 90px;
+        }
+
+        .back-link {
+            color: #888;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 55px;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        .case-number {
+            color: #9b7cff;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+        }
+
+        .case-hero h1 {
+            font-size: clamp(50px, 7vw, 90px);
+            line-height: .95;
+            letter-spacing: -5px;
+            max-width: 950px;
+            margin-bottom: 30px;
+        }
+
+        .case-hero h1 span {
+            color: #9b7cff;
+        }
+
+        .case-intro {
+            max-width: 700px;
+            color: #888;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .case-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 1250px;
+            margin: 0 auto;
+            border-top: 1px solid #292930;
+            border-bottom: 1px solid #292930;
+        }
+
+        .meta-item {
+            padding: 30px;
+            border-right: 1px solid #292930;
+        }
+
+        .meta-item:last-child {
+            border-right: none;
+        }
+
+        .meta-item small {
+            display: block;
+            color: #666;
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .meta-item strong {
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .case-section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 100px 30px;
+        }
+
+        .case-label {
+            color: #9b7cff;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .case-section h2 {
+            font-size: 42px;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+        }
+
+        .case-section p {
+            color: #888;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .three-beat {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 45px;
+        }
+
+        .beat {
+            padding: 30px;
+            background: #141419;
+            border: 1px solid #292930;
+            border-radius: 8px;
+        }
+
+        .beat-number {
+            color: #9b7cff;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .beat h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .beat p {
+            font-size: 13px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 45px;
+        }
+
+        .kpi {
+            padding: 30px 20px;
+            background: linear-gradient(145deg, #17171d, #101014);
+            border: 1px solid #292930;
+        }
+
+        .kpi strong {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .kpi span {
+            color: #666;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+        .dashboard-preview {
+            margin-top: 45px;
+            padding: 35px;
+            min-height: 400px;
+            background:
+                radial-gradient(circle at 70% 20%, #9b7cff33, transparent 35%),
+                #111116;
+            border: 1px solid #292930;
+            border-radius: 12px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .dash-card {
+            padding: 20px;
+            background: #19191f;
+            border: 1px solid #292930;
+        }
+
+        .dash-card small {
+            color: #666;
+            font-size: 8px;
+        }
+
+        .dash-card strong {
+            display: block;
+            font-size: 25px;
+            margin-top: 10px;
+        }
+
+        .chart {
+            grid-column: span 3;
+            height: 150px;
+            display: flex;
+            align-items: end;
+            gap: 12px;
+            padding-top: 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #9b7cff, #e477ff);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .b1 { height: 35%; }
+        .b2 { height: 55%; }
+        .b3 { height: 45%; }
+        .b4 { height: 70%; }
+        .b5 { height: 60%; }
+        .b6 { height: 90%; }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .tools span {
+            padding: 10px 15px;
+            border: 1px solid #333;
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .insights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .insight {
+            padding: 30px;
+            border-left: 2px solid #9b7cff;
+            background: #111116;
+        }
+
+        .insight h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .insight p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .next-project {
+            text-align: center;
+            border-top: 1px solid #292930;
+            padding: 100px 30px;
+        }
+
+        .next-project h2 {
+            font-size: 45px;
+            margin-bottom: 25px;
+        }
+
+        .case-button {
+            display: inline-block;
+            padding: 14px 22px;
+            background: white;
+            color: black;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 800px) {
+            .case-meta,
+            .three-beat,
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .insights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .case-meta,
+            .three-beat,
+            .kpi-grid,
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+
+            .meta-item {
+                border-right: none;
+                border-bottom: 1px solid #292930;
+            }
+
+            .chart {
+                grid-column: span 1;
+            }
+
+            .case-hero h1 {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            Q<span>M</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+
+        <a href="index.html#contact" class="nav-button">
+            Let's Talk ↗
+        </a>
+
+    </nav>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="case-hero">
+
+        <a href="index.html#projects" class="back-link">
+            ← Back to Projects
+        </a>
+
+        <div class="case-number">
+            CASE STUDY 01 / DATA ANALYTICS
+        </div>
+
+        <h1>
+            Sales Analytics
+            <span>Dashboard.</span>
+        </h1>
+
+        <p class="case-intro">
+            An Excel-based data analytics project focused on turning
+            raw sales information into structured insights through
+            data cleaning, Pivot Tables, KPI analysis, charts,
+            and dashboard design.
+        </p>
+
+    </section>
+
+
+    <!-- PROJECT META -->
+
+    <section class="case-meta">
+
+        <div class="meta-item">
+            <small>TOOLS</small>
+            <strong>Microsoft Excel</strong>
+        </div>
+
+        <div class="meta-item">
+            <small>PROJECT TYPE</small>
+            <strong>Data Analytics</strong>
+        </div>
+
+        <div class="meta-item">
+            <small>FOCUS</small>
+            <strong>Business Insights</strong>
+        </div>
+
+        <div class="meta-item">
+            <small>OUTPUT</small>
+            <strong>Interactive Dashboard</strong>
+        </div>
+
+    </section>
+
+
+    <!-- PROBLEM / PROCESS / RESULT -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            THE STORY
+        </div>
+
+        <h2>
+            From raw data to
+            useful information.
+        </h2>
+
+        <div class="three-beat">
+
+            <div class="beat">
+
+                <div class="beat-number">01</div>
+
+                <h3>The Problem</h3>
+
+                <p>
+                    Raw sales information can be difficult to understand
+                    when it is spread across rows of data. The goal was
+                    to organize the information and identify useful
+                    business metrics.
+                </p>
+
+            </div>
+
+
+            <div class="beat">
+
+                <div class="beat-number">02</div>
+
+                <h3>What I Did</h3>
+
+                <p>
+                    I cleaned the dataset, worked with Excel formulas,
+                    created Pivot Tables, analyzed sales KPIs, created
+                    charts, and organized the results into a dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="beat">
+
+                <div class="beat-number">03</div>
+
+                <h3>What Came of It</h3>
+
+                <p>
+                    The final dashboard provided a clearer view of
+                    sales performance and made it easier to compare
+                    departments, products, and overall performance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KPIs -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            KEY METRICS
+        </div>
+
+        <h2>
+            What the analysis showed.
+        </h2>
+
+        <p>
+            The analysis produced several useful summary metrics
+            that could be used to understand overall sales performance.
+        </p>
+
+        <div class="kpi-grid">
+
+            <div class="kpi">
+                <strong>665K</strong>
+                <span>TOTAL SALES</span>
+            </div>
+
+            <div class="kpi">
+                <strong>83.1K</strong>
+                <span>AVERAGE SALES</span>
+            </div>
+
+            <div class="kpi">
+                <strong>3</strong>
+                <span>DEPARTMENTS</span>
+            </div>
+
+            <div class="kpi">
+                <strong>8</strong>
+                <span>AVERAGE COUNT</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            MY PROCESS
+        </div>
+
+        <h2>
+            How I built it.
+        </h2>
+
+        <p>
+            I followed a structured workflow to move from raw data
+            toward a dashboard that could communicate the results
+            clearly.
+        </p>
+
+        <div class="insights">
+
+            <div class="insight">
+
+                <h3>01 — Data Cleaning</h3>
+
+                <p>
+                    Checked the dataset for inconsistencies and
+                    prepared the information for analysis.
+                </p>
+
+            </div>
+
+            <div class="insight">
+
+                <h3>02 — Pivot Tables</h3>
+
+                <p>
+                    Used Pivot Tables to summarize sales and compare
+                    performance across categories.
+                </p>
+
+            </div>
+
+            <div class="insight">
+
+                <h3>03 — KPI Analysis</h3>
+
+                <p>
+                    Calculated important metrics such as total sales
+                    and average sales.
+                </p>
+
+            </div>
+
+            <div class="insight">
+
+                <h3>04 — Dashboard</h3>
+
+                <p>
+                    Combined the analysis into a visual dashboard
+                    designed for quick understanding.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD PREVIEW -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            FINAL OUTPUT
+        </div>
+
+        <h2>
+            Dashboard concept.
+        </h2>
+
+        <p>
+            The final output brought the main metrics and visual
+            analysis together into one view.
+        </p>
+
+        <div class="dashboard-preview">
+
+            <div class="dashboard-header">
+                <span>SALES PERFORMANCE</span>
+                <span>2026</span>
+            </div>
+
+            <div class="dashboard-content">
+
+                <div class="dash-card">
+                    <small>TOTAL SALES</small>
+                    <strong>665K</strong>
+                </div>
+
+                <div class="dash-card">
+                    <small>AVERAGE SALES</small>
+                    <strong>83.1K</strong>
+                </div>
+
+                <div class="dash-card">
+                    <small>DEPARTMENTS</small>
+                    <strong>03</strong>
+                </div>
+
+                <div class="chart">
+
+                    <div class="chart-bar b1"></div>
+                    <div class="chart-bar b2"></div>
+                    <div class="chart-bar b3"></div>
+                    <div class="chart-bar b4"></div>
+                    <div class="chart-bar b5"></div>
+                    <div class="chart-bar b6"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            TOOLS & SKILLS
+        </div>
+
+        <h2>
+            What I practiced.
+        </h2>
+
+        <div class="tools">
+
+            <span>Microsoft Excel</span>
+            <span>Data Cleaning</span>
+            <span>Excel Formulas</span>
+            <span>SUMIF</span>
+            <span>COUNTIF</span>
+            <span>SUMIFS</span>
+            <span>COUNTIFS</span>
+            <span>Pivot Tables</span>
+            <span>Charts</span>
+            <span>KPI Analysis</span>
+            <span>Dashboard Design</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEARNING -->
+
+    <section class="case-section">
+
+        <div class="case-label">
+            REFLECTION
+        </div>
+
+        <h2>
+            What I learned.
+        </h2>
+
+        <p>
+            This project helped me understand that data analysis is
+            not only about calculating numbers. The way information
+            is organized and presented can make the results much
+            easier for someone else to understand and use.
+        </p>
+
+        <p>
+            I also gained practical experience with Excel's analytical
+            features, especially Pivot Tables, formulas, KPIs,
+            visualization, and dashboard creation.
+        </p>
+
+    </section>
+
+
+    <!-- NEXT -->
+
+    <section class="next-project">
+
+        <h2>
+            More projects coming.
+        </h2>
+
+        <p style="color:#777; max-width:550px; margin:0 auto 30px;">
+            I'm continuing to build practical projects across
+            data analytics, business intelligence, software engineering,
+            and AI/ML.
+        </p>
+
+        <a href="index.html#projects" class="case-button">
+            View All Projects →
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            Q<span>M</span>
+        </div>
+
+        <div>
+            © 2026 Qurat ul Mursaleen
+        </div>
+
+        <div>
+            Software Engineering × Data
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
+```
